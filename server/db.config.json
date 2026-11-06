@@ -1,0 +1,42 @@
+{
+  "_readme": "Edit host, port, database and user. Do NOT put the password here: it is asked every time the server starts. Keys starting with _ are notes and are ignored.",
+  "host": "10.236.192.8",
+  "port": 5433,
+  "database": "integrateddb",
+  "user": "postgres",
+  "schema": "public",
+  "ssl": {
+    "mode": "prefer",
+    "_modes": "disable | prefer (try SSL, fall back to plain; same as pgAdmin 'prefer') | require (encrypted, certificate not checked) | verify-ca (certificate checked, host name not) | verify-full (certificate and host name checked; recommended)",
+    "caFile": null
+  },
+  "connectionTimeoutMs": 10000,
+  "tables": {
+    "resolverEobc": "resolver_login_eobc",
+    "resolverHd": "resolver_login_hd",
+    "dealer": "dealer_login",
+    "routing": "issue_routing_master"
+  },
+  "ticketCreators": ["eobc:1", "eobc:2"],
+  "_ticketCreators": "Help desk ticket creators: eobc:<id from resolver_login_eobc> or hd:<resolver_id from resolver_login_hd>. Only these accounts see Type, Source and Date received.",
+  "wingTables": { "eobc": "eobc", "helpdesk": "hd" },
+  "_wingTables": "Which resolver table holds the assignees of each routing 'wing'. eobc matches adminusername, hd matches user_name.",
+  "dealerAuthenticator": "Dealer",
+  "auth": {
+    "passwordHash": "auto",
+    "_passwordHash": "auto | md5 | sha1 | sha256 | sha512 | bcrypt. Find out with: npm run db:check -- --hash-test",
+    "sampleOtp": "123456",
+    "_sampleOtp": "SAMPLE ONLY: every dealer OTP is this value and nothing is emailed. Replace with a real OTP/SMS service before any real use.",
+    "sessionMinutes": 30
+  },
+  "uploads": {
+    "dir": "./uploads",
+    "_dir": "Folder on this machine where attachments are saved (the full path is stored in the database). Example: \"/Users/you/Documents/Helpdesk/uploads\" or \"C:/Helpdesk/uploads\".",
+    "maxFileMB": 5
+  },
+  "api": {
+    "port": 4000,
+    "allowedOrigin": "http://localhost:5173",
+    "secureCookie": false
+  }
+}
